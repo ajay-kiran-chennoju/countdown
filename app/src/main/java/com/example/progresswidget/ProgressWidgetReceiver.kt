@@ -5,14 +5,13 @@ import android.content.Intent
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.updateAll
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProgressWidgetReceiver : GlanceAppWidgetReceiver() {
     override val glanceAppWidget: GlanceAppWidget = ProgressWidget()
 
-    @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
         val action = intent.action
@@ -22,7 +21,7 @@ class ProgressWidgetReceiver : GlanceAppWidgetReceiver() {
             action == Intent.ACTION_TIME_SET ||
             action == Intent.ACTION_TIMEZONE_CHANGED) {
             
-            GlobalScope.launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 ProgressWidget().updateAll(context)
             }
         }

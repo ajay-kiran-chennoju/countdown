@@ -36,9 +36,10 @@ class MainActivity : ComponentActivity() {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     var showConfigScreen by remember { mutableStateOf(launchedFromWidget) }
+                    val context = androidx.compose.ui.platform.LocalContext.current
                     
                     if (showConfigScreen) {
-                        ConfigScreen(this)
+                        ConfigScreen(context)
                     } else {
                         LauncherScreen { showConfigScreen = true }
                     }
