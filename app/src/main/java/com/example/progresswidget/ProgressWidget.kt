@@ -53,7 +53,7 @@ fun WidgetContent() {
         // Root layout - transparent, fully clickable, centers image
         Box(
             modifier = GlanceModifier.fillMaxSize()
-                .clickable(actionStartActivity(android.content.ComponentName(context, MainActivity::class.java))),
+                .clickable(actionStartActivity(android.content.Intent(context, MainActivity::class.java))),
             contentAlignment = Alignment.Center
         ) {
             Image(
