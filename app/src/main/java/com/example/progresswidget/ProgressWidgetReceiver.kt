@@ -18,7 +18,7 @@ class ProgressWidgetReceiver : GlanceAppWidgetReceiver() {
         
         // Listen securely spanning across native Android system date shifts to perfectly trigger Glance refreshes invisibly!
         if (action == Intent.ACTION_DATE_CHANGED ||
-            action == Intent.ACTION_TIME_SET ||
+            action == Intent.ACTION_TIME_CHANGED ||
             action == Intent.ACTION_TIMEZONE_CHANGED) {
             
             CoroutineScope(Dispatchers.IO).launch {
