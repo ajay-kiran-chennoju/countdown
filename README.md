@@ -1,18 +1,31 @@
-# ProgressWidget
+# Gestures
 
-This is a clean, minimal, responsive Android home screen widget built with Jetpack Glance that visually represents progress over a dynamically configurable number of days.
+Gestures is a polished, multi-feature Android utility app that combines visual progress tracking with intelligent battery automation.
+
+## Features
+
+### 1. Visual Progress Tracker Widget
+- **Dynamic Grid**: A pixel-perfect, responsive home screen widget built with Jetpack Glance.
+- **Auto-scaling**: Efficiently renders 365+ days using a native Canvas bitmap approach to ensure zero lag.
+- **Customizable**: Fully configurable start/end dates and color schemes.
+
+### 2. Intelligent Battery Tracker
+- **Automation Events**: Configure triggers for charger connection, disconnection, and battery level thresholds.
+- **TTS Announcements**: Custom Text-To-Speech messages for every event.
+- **Background Reliability**: Uses a foreground service to ensure real-time monitoring on Android 12+.
+- **Minimal UI**: Modern, Material 3 card-based interface with expandable settings.
 
 ## Architectural Choices 
 
-1. **Pixel-Perfect Auto-scaling Grid via Canvas Bitmap Generation**:
-   The prompt specifically requested that the Android widget be responsive, maintaining consistent scaling for 365+ items without lag or scrolling. Since `RemoteViews` layouts (which Jetpack Glance wraps) have a strict structural depth and node limit mapping 365 distinct layouts on-the-fly would fail and lag intensely on standard devices.
-   Instead, this widget hooks into Glance's `SizeMode.Exact` to determine the perfect layout size, statically calculates the grid dimensions natively so there are absolutely no edge-clipping issues, and draws an optimized uncompressed Bitmap. This passes down an absolute minimal layout tree (just an ImageView), ensuring silky smooth Home Screen resizing performance while meeting all pixel-spacing symmetry constraints.
+1. **Jetpack Compose & Material 3**: Entire UI is built with Compose for a reactive, modern experience.
+2. **DataStore Persistence**: Lightweight and safe data management for all automation settings.
+3. **Foreground Service**: Ensures foreground-safe handling of battery broadcasts for consistent performance.
+4. **Glance Widget**: Leverages Jetpack Glance for high-performance home screen widgets.
 
-2. **Ultra-Minimal Adaptive Colors**:
-   Follows light/dark system settings as fallbacks when custom HEX codes are not supplied, defaulting to distinct visually complementary shades. Background is totally 100% transparent.
+## Development
 
-3. **Fully Interactive**:
-   Clicking the grid triggers the underlying App container to modify HEX values, current progression, and totals to instantly see updates on the home screen.
+- **Build System**: Gradle Kotlin DSL.
+- **CI/CD**: GitHub Actions configured to build and export `Gestures.apk` and `Gestures.aab`.
 
-To build it:
-Open the `Widget` folder in Android Studio. Wait for it to sync Gradle, then press 'Run' to install it on your device/emulator!
+To build: Open the project in Android Studio, sync Gradle, and run on your device!
+
